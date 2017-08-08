@@ -212,28 +212,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\progress_0.ico" />
+    <None Include="Resources\logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\progress_1.ico" />
+    <None Include="Resources\Progress_0.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\progress_2.ico" />
+    <None Include="Resources\Progress_1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\progress_3.ico" />
+    <None Include="Resources\Progress_2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Progress_3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\done.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Info.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\warning.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets')" />
