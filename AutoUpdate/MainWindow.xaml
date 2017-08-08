@@ -1,0 +1,29 @@
+﻿<Window x:Class="AutoUpdate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoUpdate"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="42" Width="380" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ProgressBar x:Name="dl_ProgressBar" Height="42" VerticalAlignment="Top" BorderBrush="#FF6E6E6E" Background="#FF969696" HorizontalAlignment="Left" Width="380">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="-90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF89DDFD" Offset="0.5"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <Label x:Name="dl_progress_label" Height="42" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Padding="0" Foreground="White" HorizontalAlignment="Left" Width="380" Content="0"/>
+        <Label x:Name="label" Content="AutoUpdate" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92" Margin="288,21,0,0" Padding="0" Foreground="#7FFFFFFF" Background="#00000000" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+    </Grid>
+</Window>
