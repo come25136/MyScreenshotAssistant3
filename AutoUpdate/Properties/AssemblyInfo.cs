@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AutoUpdate")]
-[assembly: AssemblyCopyright("Copyright ©  2016 come25136")]
+[assembly: AssemblyCopyright("Copyright ©  2017 momizicode")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
