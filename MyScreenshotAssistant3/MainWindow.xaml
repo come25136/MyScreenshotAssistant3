@@ -601,6 +601,9 @@
                     <Label Margin="379,113,10,10" Padding="0" HorizontalContentAlignment="Right" FontSize="14">
                         <Hyperlink NavigateUri="https://api.ppn.pw/" ToolTip="{Binding ElementName=hyperlink, Path=NavigateUri}" RequestNavigate="Hyperlink_RequestNavigate">API Keyを取得</Hyperlink>
                     </Label>
+                    <Label Margin="10,113,355,10" Padding="0" FontSize="14">
+                        <Hyperlink NavigateUri="https://i.ppn.pw/mypage/index.php" ToolTip="{Binding NavigateUri, ElementName=hyperlink}" RequestNavigate="Hyperlink_RequestNavigate">CorkBoard My Page</Hyperlink>
+                    </Label>
                 </Grid>
             </TabItem>
 
