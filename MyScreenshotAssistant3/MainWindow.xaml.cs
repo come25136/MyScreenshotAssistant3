@@ -121,7 +121,7 @@ namespace msa3
                 try
                 {
                     // Twitter API 認証情報
-                    tokens = Tokens.Create(API_Keys.consumerKey, API_Keys.cosumerSecret, AccountTable.Rows[row]["AccessToken"].ToString(), AccountTable.Rows[row]["AccessTokenSecret"].ToString());
+                    tokens = Tokens.Create(API_Keys.consumerKey, API_Keys.consumerSecret, AccountTable.Rows[row]["AccessToken"].ToString(), AccountTable.Rows[row]["AccessTokenSecret"].ToString());
 
                     // Twitterアカウントアイコン取得
                     using (MemoryStream stream = new MemoryStream(await hc.GetByteArrayAsync(tokens.Account.VerifyCredentials().ProfileImageUrlHttps.Replace("normal", "bigger")).ConfigureAwait(false)))

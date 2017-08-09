@@ -7,7 +7,7 @@ namespace msa3
     class API_Keys
     {
         public static string consumerKey = "Consumer Key";
-        public static string cosumerSecret = "Consumer Secret";
+        public static string consumerSecret = "Consumer Secret";
     }
 }
 ```

@@ -10,7 +10,7 @@ namespace msa3
     /// </summary>
     public partial class LoginWindow : Window
     {
-        OAuth.OAuthSession session = CoreTweet.OAuth.Authorize(API_Keys.consumerKey, API_Keys.cosumerSecret);
+        OAuth.OAuthSession session = CoreTweet.OAuth.Authorize(API_Keys.consumerKey, API_Keys.consumerSecret);
 
         string url; // OAuth_url
 
@@ -60,7 +60,7 @@ namespace msa3
                 try
                 {
                     Tokens tokens = CoreTweet.OAuth.GetTokens(session, OAuth_pin_Textbox.Text);
-                    Tokens info = Tokens.Create(API_Keys.consumerKey, API_Keys.cosumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
+                    Tokens info = Tokens.Create(API_Keys.consumerKey, API_Keys.consumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
 
                     OAuth_pin_Textbox.Text = "";
 
