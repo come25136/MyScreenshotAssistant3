@@ -45,7 +45,7 @@ namespace AutoUpdate
             downloadClient.DownloadFileCompleted += DownloadClient_DownloadFileCompleted;
 
             //非同期ダウンロードを開始する
-            downloadClient.DownloadFileAsync(new Uri(App.dlurl), temp + App.dlname);
+            downloadClient.DownloadFileAsync(new Uri(App.dlurl), $"{temp}{App.dlname}");
         }
 
         private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -60,11 +60,11 @@ namespace AutoUpdate
             {
                 if (e.Error != null) Message("エラー: ファイルのダウンロードに失敗しました");
 
-                Console.WriteLine(App.hash + "\n" + Gethash(temp + App.dlname));
+                Console.WriteLine($"{App.hash}\n{Gethash($"{temp}{App.dlname}")}");
 
                 Console.WriteLine(string.Compare(App.hash, Gethash(temp + App.dlname), true));
 
-                if (string.Compare(App.hash, Gethash(temp + App.dlname), true) == 0)
+                if (string.Compare(App.hash, Gethash($"{temp}{App.dlname}"), true) == 0)
                 {
                     Dispatcher.Invoke(() => { dl_ProgressBar.Maximum = App.argument.Count; });
 
@@ -72,28 +72,28 @@ namespace AutoUpdate
                     {
                         try
                         {
-                            File.Copy(cmd, temp + cmd, true);
+                            File.Copy(cmd, $"{temp}{cmd}", true);
 
                             Progress_count();
 
-                            if (Gethash(cmd) != Gethash(temp + cmd)) Message("エラー: ファイルのバックアップに失敗しました");
+                            if (Gethash(cmd) != Gethash($"{temp}{cmd}")) Message("エラー: ファイルのバックアップに失敗しました");
                         }
                         catch { }
                     }
 
                     Delete("./", false);
 
-                    ZipFile.ExtractToDirectory(temp + App.dlname, temp);
+                    ZipFile.ExtractToDirectory($"{temp}{App.dlname}", temp);
 
-                    CopyAndReplace(temp + App.appname, "./");
+                    CopyAndReplace($"{temp}{App.appname}", "./");
 
                     foreach (string cmd in App.argument)
                     {
                         try
                         {
-                            File.Copy(temp + cmd, cmd, true);
+                            File.Copy($"{temp}{cmd}", cmd, true);
 
-                            if (Gethash(cmd) != Gethash(temp + cmd)) Message("エラー: ファイルの復元に失敗しました");
+                            if (Gethash(cmd) != Gethash($"{temp}{cmd}")) Message("エラー: ファイルの復元に失敗しました");
                         }
                         catch { }
                     }
@@ -162,7 +162,7 @@ namespace AutoUpdate
                         Dispatcher.Invoke(() =>
                         {
                             dl_ProgressBar.Value = percent;
-                            dl_progress_label.Content = percent + "%";
+                            dl_progress_label.Content = $"{percent}%";
                         });
                     }
                 }
@@ -239,7 +239,7 @@ namespace AutoUpdate
                 //ディレクトリの中のディレクトリも再帰的に削除
                 foreach (string directoryPath in Directory.GetDirectories(targetDirectoryPath))
                 {
-                    if (directoryPath != "./" + roottemp)
+                    if (directoryPath != $"./{roottemp}")
                     {
                         try
                         {

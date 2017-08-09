@@ -17,7 +17,12 @@ namespace msa3
             try
             {
                 // アップデート用jsonの取得
-                updatejson = JsonConvert.DeserializeObject<UpdateJson>(new StreamReader(WebRequest.Create("https://msa.momizi.work/3/update.json").GetResponse().GetResponseStream()).ReadToEnd());
+                using (WebResponse response = WebRequest.Create("https://msa.momizi.work/3/update.json").GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    updatejson = JsonConvert.DeserializeObject<UpdateJson>(reader.ReadToEnd());
+                }
 
                 if (app.Version != updatejson.version)
                 {
@@ -25,7 +30,7 @@ namespace msa3
                     new UpdateWindow().ShowDialog();
                 }
             }
-            catch (Exception)
+            catch
             {
                 Method.Message("サーバーエラー", "アップデート確認用サーバーにアクセスできませんでした");
             }

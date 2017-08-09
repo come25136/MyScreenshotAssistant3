@@ -19,7 +19,7 @@ namespace msa3
 
         public string SoftwareTitle
         {
-            get { return SoftwareName + " ver:" + Version; }
+            get { return $"{SoftwareName} ver:{Version}"; }
         }
     }
 }

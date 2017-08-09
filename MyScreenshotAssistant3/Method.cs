@@ -36,10 +36,9 @@ namespace msa3
         {
             try
             {
-                File.AppendAllText("msa3.log", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " " + level + ": " + value + '\r' + '\n');
-                return;
+                File.AppendAllText("msa3.log", $"{DateTime.Now:yyyy/MM/dd HH:mm:ss} {level}: {value}\r\n");
             }
-            catch (Exception) { }
+            catch { }
         }
 
         /// <summary>SQLite Logine</summary>
@@ -58,9 +57,9 @@ namespace msa3
                 Sql("create table if not exists ApplicationData (AppName string primary key, TwitterId string, fixed string, hashtag string, wait_time int, ACAK text)");
                 Sql("create table if not exists DirectoryData (watch bool, name string, path string primary key)");
 
-                Sql("INSERT OR IGNORE INTO ApplicationData(AppName, wait_time) VALUES('" + app.SoftwareName + "', 300);");
+                Sql($"INSERT OR IGNORE INTO ApplicationData(AppName, wait_time) VALUES('{app.SoftwareName}', 300);");
             }
-            catch (Exception)
+            catch
             {
                 Logfile("Error", "Unable to connect to database.");
             }
@@ -77,7 +76,7 @@ namespace msa3
                 statement.CommandText = value;
                 statement.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch
             {
                 Logfile("Error", "Failed to execute the sql statement.");
             }
@@ -92,17 +91,16 @@ namespace msa3
         {
             try
             {
-                statement.CommandText = value;
-                return statement.ExecuteReader();
+                using (statement)
+                {
+                    statement.CommandText = value;
+                    return statement.ExecuteReader();
+                }
             }
-            catch (Exception)
+            catch
             {
                 Logfile("Error", "Failed to execute the sql_reader statement.");
                 return null;
-            }
-            finally
-            {
-                statement.Dispose();
             }
         }
 
@@ -115,7 +113,7 @@ namespace msa3
             {
                 string[] files = Directory.GetFiles(folderName, "*.png", SearchOption.TopDirectoryOnly);
 
-                string newestFileName = string.Empty;
+                string newestFileName = "";
                 DateTime updateTime = DateTime.MinValue;
                 foreach (string file in files)
                 {
@@ -128,7 +126,7 @@ namespace msa3
                 }
                 return Path.GetFileName(newestFileName);
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }

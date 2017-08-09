@@ -10,7 +10,7 @@ namespace msa3
     /// </summary>
     public partial class LoginWindow : Window
     {
-        OAuth.OAuthSession session = CoreTweet.OAuth.Authorize(API_Keys.consumerKey, API_Keys.cosumerSecret);
+        OAuth.OAuthSession session = CoreTweet.OAuth.Authorize(API_Keys.consumerKey, API_Keys.consumerSecret);
 
         string url; // OAuth_url
 
@@ -18,7 +18,7 @@ namespace msa3
         {
             App app = (App)Application.Current;
 
-            Title = app.SoftwareTitle + " - Login";
+            Title = $"{app.SoftwareTitle} - Login";
 
             InitializeComponent();
         }
@@ -44,12 +44,13 @@ namespace msa3
         // 認証処理
         private void OAuth()
         {
+            OAuth_pin_Textbox.Text = OAuth_pin_Textbox.Text.Trim();
             if (OAuth_pin_Textbox.Text == "")
             {
                 //何も入力されていない場合
                 Method.Message("Error", "PINコードを入力してください");
             }
-            else if (Regex.IsMatch(OAuth_pin_Textbox.Text, "/^[0-9]+$/"))
+            else if (IsNotDigit(OAuth_pin_Textbox.Text))
             {
                 // 半角数字以外の文字列が入力されていた場合
                 Method.Message("Error", "半角数字を入力してください");
@@ -59,9 +60,9 @@ namespace msa3
                 try
                 {
                     Tokens tokens = CoreTweet.OAuth.GetTokens(session, OAuth_pin_Textbox.Text);
-                    Tokens info = Tokens.Create(API_Keys.consumerKey, API_Keys.cosumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
+                    Tokens info = Tokens.Create(API_Keys.consumerKey, API_Keys.consumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
 
-                    OAuth_pin_Textbox.Text = string.Empty;
+                    OAuth_pin_Textbox.Text = "";
 
                     DataRow datarow = MainWindow.AccountTable.NewRow();
 
@@ -87,6 +88,18 @@ namespace msa3
         {
             url = session.AuthorizeUri.ToString();
             OAuth_url_Textbox.Text = url;
+        }
+
+        // 半角数字検証
+        public bool IsNotDigit(string context)
+        {
+            int length = context.Length; // 多分これが一番早いと思います
+            for (int i = 0; i < length; i++)
+            {
+                char c = context[i];
+                if ('0' > c || c > '9') return true;
+            }
+            return false;
         }
     }
 }
