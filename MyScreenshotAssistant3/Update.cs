@@ -25,7 +25,7 @@ namespace msa3
                     new UpdateWindow().ShowDialog();
                 }
             }
-            catch (Exception)
+            catch
             {
                 Method.Message("サーバーエラー", "アップデート確認用サーバーにアクセスできませんでした");
             }

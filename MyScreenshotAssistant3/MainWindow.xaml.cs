@@ -136,7 +136,7 @@ namespace msa3
 
                             Dispatcher.Invoke(() => { Twitter_icon_Image.ImageSource = image; });
                         }
-                        catch (Exception)
+                        catch
                         {
                             Dispatcher.Invoke(() => { Twitter_icon_Image.ImageSource = null; });
                         }
@@ -379,7 +379,7 @@ namespace msa3
 
                 AccountAdapter.Update(AccountTable);
             }
-            catch (Exception) { }
+            catch { }
 
             // フォルダデータを保存
             try
@@ -388,7 +388,7 @@ namespace msa3
 
                 DirectoryAdapter.Update(DirectoryTable);
             }
-            catch (Exception)
+            catch
             {
                 Method.Message("Warning", "同じフォルダ設定が存在します");
                 return;
@@ -409,7 +409,7 @@ namespace msa3
 
                 ApplicationAdapter.Update(ApplicationTable);
             }
-            catch (Exception) { }
+            catch { }
 
             Method.database.Close();
 
@@ -505,7 +505,7 @@ namespace msa3
             {
                 DirectoryTable.Rows.RemoveAt(DirectoryData_DataGrid.SelectedIndex);
             }
-            catch (Exception) { }
+            catch { }
         }
 
         private void Tweet_fixed_value_TextBox_TextChanged(object sender, TextChangedEventArgs e)

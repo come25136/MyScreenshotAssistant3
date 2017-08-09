@@ -39,7 +39,7 @@ namespace msa3
                 File.AppendAllText("msa3.log", $"{DateTime.Now:yyyy/MM/dd HH:mm:ss} {level}: {value}\r\n");
                 return;
             }
-            catch (Exception) { }
+            catch { }
         }
 
         /// <summary>SQLite Logine</summary>
@@ -60,7 +60,7 @@ namespace msa3
 
                 Sql($"INSERT OR IGNORE INTO ApplicationData(AppName, wait_time) VALUES('{app.SoftwareName}', 300);");
             }
-            catch (Exception)
+            catch
             {
                 Logfile("Error", "Unable to connect to database.");
             }
@@ -77,7 +77,7 @@ namespace msa3
                 statement.CommandText = value;
                 statement.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch
             {
                 Logfile("Error", "Failed to execute the sql statement.");
             }
@@ -95,7 +95,7 @@ namespace msa3
                 statement.CommandText = value;
                 return statement.ExecuteReader();
             }
-            catch (Exception)
+            catch
             {
                 Logfile("Error", "Failed to execute the sql_reader statement.");
                 return null;
@@ -128,7 +128,7 @@ namespace msa3
                 }
                 return Path.GetFileName(newestFileName);
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
