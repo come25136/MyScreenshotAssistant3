@@ -92,17 +92,16 @@ namespace msa3
         {
             try
             {
-                statement.CommandText = value;
-                return statement.ExecuteReader();
+                using (statement)
+                {
+                    statement.CommandText = value;
+                    return statement.ExecuteReader();
+                }
             }
             catch
             {
                 Logfile("Error", "Failed to execute the sql_reader statement.");
                 return null;
-            }
-            finally
-            {
-                statement.Dispose();
             }
         }
 
