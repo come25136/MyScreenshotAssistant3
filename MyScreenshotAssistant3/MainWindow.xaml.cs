@@ -182,7 +182,7 @@ namespace msa3
                 return;
             }
 
-            if (wait_time.Text == string.Empty)
+            if (wait_time.Text == "")
             {
                 Tweet_Button.IsChecked = false;
                 Method.Message("Error", "スクリーンショット検知からツイートまでの待機時間が指定されていません");
@@ -193,13 +193,13 @@ namespace msa3
 
             foreach (DataRow row in DirectoryTable.Rows)
             {
-                if (row["watch"].ToString() != string.Empty && (bool)row["watch"])
+                if (row["watch"].ToString() != "" && (bool)row["watch"])
                 {
                     try
                     {
                         Watchers.Add(new FileSystemWatcher());
 
-                        Watchers[Watchers.Count - 1].Path = (String)row["path"];
+                        Watchers[Watchers.Count - 1].Path = (string)row["path"];
                         Watchers[Watchers.Count - 1].NotifyFilter =
                             (NotifyFilters.LastAccess
                             | NotifyFilters.LastWrite
@@ -288,7 +288,7 @@ namespace msa3
                         {
                             Tasktray_animation();
 
-                            if (file.Length < 5142880 || file.Length < 83786080 && Dispatcher.Invoke(() => { return ACAK.Text; }) != string.Empty)
+                            if (file.Length < 5142880 || file.Length < 83786080 && Dispatcher.Invoke(() => { return ACAK.Text; }) != "")
                             {
                                 Dispatcher.Invoke(() => { new TweetWindow().ShowDialog(); });
                                 if (TweetWindow.cancel_flag) return;
@@ -305,7 +305,7 @@ namespace msa3
 
                                     Method.Logfile("Info", "Success tweet.");
                                 }
-                                else if (file.Length < 83786080 && Dispatcher.Invoke(() => { return ACAK.Text; }) != string.Empty)
+                                else if (file.Length < 83786080 && Dispatcher.Invoke(() => { return ACAK.Text; }) != "")
                                 {
                                     MultipartFormDataContent form = new MultipartFormDataContent();
 

@@ -115,7 +115,7 @@ namespace msa3
             {
                 string[] files = Directory.GetFiles(folderName, "*.png", SearchOption.TopDirectoryOnly);
 
-                string newestFileName = string.Empty;
+                string newestFileName = "";
                 DateTime updateTime = DateTime.MinValue;
                 foreach (string file in files)
                 {

@@ -61,7 +61,7 @@ namespace msa3
                     Tokens tokens = CoreTweet.OAuth.GetTokens(session, OAuth_pin_Textbox.Text);
                     Tokens info = Tokens.Create(API_Keys.consumerKey, API_Keys.cosumerSecret, tokens.AccessToken, tokens.AccessTokenSecret);
 
-                    OAuth_pin_Textbox.Text = string.Empty;
+                    OAuth_pin_Textbox.Text = "";
 
                     DataRow datarow = MainWindow.AccountTable.NewRow();
 
