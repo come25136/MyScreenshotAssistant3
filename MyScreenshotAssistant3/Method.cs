@@ -37,7 +37,6 @@ namespace msa3
             try
             {
                 File.AppendAllText("msa3.log", $"{DateTime.Now:yyyy/MM/dd HH:mm:ss} {level}: {value}\r\n");
-                return;
             }
             catch { }
         }
