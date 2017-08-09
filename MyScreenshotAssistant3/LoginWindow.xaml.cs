@@ -44,12 +44,13 @@ namespace msa3
         // 認証処理
         private void OAuth()
         {
+            OAuth_pin_Textbox.Text = OAuth_pin_Textbox.Text.Trim();
             if (OAuth_pin_Textbox.Text == "")
             {
                 //何も入力されていない場合
                 Method.Message("Error", "PINコードを入力してください");
             }
-            else if (Regex.IsMatch(OAuth_pin_Textbox.Text, "/^[0-9]+$/"))
+            else if (IsNotDigit(OAuth_pin_Textbox.Text))
             {
                 // 半角数字以外の文字列が入力されていた場合
                 Method.Message("Error", "半角数字を入力してください");
@@ -87,6 +88,18 @@ namespace msa3
         {
             url = session.AuthorizeUri.ToString();
             OAuth_url_Textbox.Text = url;
+        }
+
+        // 半角数字検証
+        public bool IsNotDigit(string context)
+        {
+            int length = context.Length; // 多分これが一番早いと思います
+            for (int i = 0; i < length; i++)
+            {
+                char c = context[i];
+                if ('0' > c || c > '9') return true;
+            }
+            return false;
         }
     }
 }
