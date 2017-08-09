@@ -36,7 +36,7 @@ namespace msa3
         {
             try
             {
-                File.AppendAllText("msa3.log", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " " + level + ": " + value + '\r' + '\n');
+                File.AppendAllText("msa3.log", $"{DateTime.Now:yyyy/MM/dd HH:mm:ss} {level}: {value}\r\n");
                 return;
             }
             catch (Exception) { }
@@ -58,7 +58,7 @@ namespace msa3
                 Sql("create table if not exists ApplicationData (AppName string primary key, TwitterId string, fixed string, hashtag string, wait_time int, ACAK text)");
                 Sql("create table if not exists DirectoryData (watch bool, name string, path string primary key)");
 
-                Sql("INSERT OR IGNORE INTO ApplicationData(AppName, wait_time) VALUES('" + app.SoftwareName + "', 300);");
+                Sql($"INSERT OR IGNORE INTO ApplicationData(AppName, wait_time) VALUES('{app.SoftwareName}', 300);");
             }
             catch (Exception)
             {

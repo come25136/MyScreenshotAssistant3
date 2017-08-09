@@ -16,7 +16,7 @@ namespace msa3
 
         public TweetWindow()
         {
-            Title = app.SoftwareTitle + " - TweetWindow";
+            Title = $"{app.SoftwareTitle} - TweetWindow";
 
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace msa3
             // ツイート
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.Enter))
             {
-                value = '\n' + Tweet_value_TextBox.Text;
+                value = $"\n{Tweet_value_TextBox.Text}";
                 cancel_flag = false;
                 Close();
             }

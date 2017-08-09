@@ -84,7 +84,7 @@ namespace msa3
             ApplicationAdapter = new SQLiteDataAdapter("SELECT * FROM ApplicationData", Method.database);
             ApplicationAdapter.Fill(ApplicationTable);
 
-            DataRow[] apptable = ApplicationTable.Select("AppName = '" + app.SoftwareName + "'");
+            DataRow[] apptable = ApplicationTable.Select($"AppName = '{app.SoftwareName}'");
             Twitter_id.Text = apptable[0]["TwitterId"].ToString();
             Tweet_fixed_value_TextBox.Text = apptable[0]["fixed"].ToString();
             Tweet_Hashtag_value_TextBox.Text = apptable[0]["hashtag"].ToString();
@@ -215,7 +215,7 @@ namespace msa3
                     catch (ArgumentException)
                     {
                         Tweet_Button.IsChecked = false;
-                        Method.Message("Error", row["path"] + " は存在しません");
+                        Method.Message("Error", $"{row["path"]} は存在しません");
                         return;
                     }
                 }
@@ -234,7 +234,7 @@ namespace msa3
 
             notifyIcon1.Icon = Properties.Resources.done;
 
-            Title = app.SoftwareTitle + " - Status start";
+            Title = $"{app.SoftwareTitle} - Status start";
 
             Method.Logfile("Info", "Assistant start.");
 
@@ -252,7 +252,7 @@ namespace msa3
 
             if (flag)
             {
-                Title = app.SoftwareTitle + " - Status stop";
+                Title = $"{app.SoftwareTitle} - Status stop";
 
                 Method.Logfile("Info", "Assistant stop.");
 
@@ -277,7 +277,7 @@ namespace msa3
 
                         if (file.Length == 0)
                         {
-                            Method.Logfile("Warning", "There is no data in the file " + e.FullPath);
+                            Method.Logfile("Warning", $"There is no data in the file {e.FullPath}");
 
                             Tasktray_notify("Warning", "ファイルの中にデータがありません\n待機時間を調整してください");
 
@@ -299,7 +299,7 @@ namespace msa3
                                 if (file.Length < 5142880)
                                 {
                                     tokens.Statuses.Update(
-                                        status: Dispatcher.Invoke(() => { return Tweet_fixed_value_TextBox.Text.Replace(@"\n", "\n") + tweet_value + " " + Tweet_Hashtag_value_TextBox.Text.Replace(@"\n", "\n"); }),
+                                        status: Dispatcher.Invoke(() => { return $"{Tweet_fixed_value_TextBox.Text.Replace(@"\n", "\n")}{tweet_value} {Tweet_Hashtag_value_TextBox.Text.Replace(@"\n", "\n")}"; }),
                                         media_ids: new long[] { tokens.Media.Upload(media: file).MediaId }
                                     );
 
@@ -314,25 +314,25 @@ namespace msa3
 
                                     form.Add(content);
 
-                                    HttpResponseMessage response = hc.PostAsync("https://api.ppn.pw/v2/img_uploader.php?key=" + Dispatcher.Invoke(() => { return ACAK.Text; }), form).Result;
+                                    HttpResponseMessage response = hc.PostAsync($"https://api.ppn.pw/v2/img_uploader.php?key={Dispatcher.Invoke(() => { return ACAK.Text; })}", form).Result;
                                     Arksoft_CorkBoard_API result = JsonConvert.DeserializeObject<Arksoft_CorkBoard_API>(response.Content.ReadAsStringAsync().Result);
 
                                     if (result != null && result.status == "success")
                                     {
                                         tokens.Statuses.Update(
-                                            status: Dispatcher.Invoke(() => { return Tweet_fixed_value_TextBox.Text.Replace(@"\n", "\n") + tweet_value + " " + Tweet_Hashtag_value_TextBox.Text.Replace(@"\n", "\n") + "\n" + result.img_url; })
+                                            status: Dispatcher.Invoke(() => { return $"{Tweet_fixed_value_TextBox.Text.Replace(@"\n", "\n")}{tweet_value} {Tweet_Hashtag_value_TextBox.Text.Replace(@"\n", "\n")}\n{result.img_url}"; })
                                         );
                                     }
                                     else
                                     {
                                         Tasktray_notify("Warning", "CorkBoardにアップロードできませんでした");
-                                        Method.Logfile("Warning", "Could not upload to CorkBoard " + e.FullPath);
+                                        Method.Logfile("Warning", $"Could not upload to CorkBoard {e.FullPath}");
                                     }
                                 }
                                 else
                                 {
                                     Tasktray_notify("Warning", "ファイルサイズが5MBを超えています");
-                                    Method.Logfile("Warning", "File size over 5MB " + e.FullPath);
+                                    Method.Logfile("Warning", $"File size over 5MB {e.FullPath}");
                                 }
                             }
                         }
@@ -397,7 +397,7 @@ namespace msa3
             // アプリケーションデータを保存
             try
             {
-                DataRow[] apptable = ApplicationTable.Select("AppName = '" + app.SoftwareName + "'");
+                DataRow[] apptable = ApplicationTable.Select($"AppName = '{app.SoftwareName}'");
 
                 apptable[0]["TwitterId"] = Twitter_id.Text;
                 apptable[0]["fixed"] = Tweet_fixed_value_TextBox.Text;

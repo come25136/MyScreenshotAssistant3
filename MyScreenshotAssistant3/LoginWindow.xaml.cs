@@ -18,7 +18,7 @@ namespace msa3
         {
             App app = (App)Application.Current;
 
-            Title = app.SoftwareTitle + " - Login";
+            Title = $"{app.SoftwareTitle} - Login";
 
             InitializeComponent();
         }
